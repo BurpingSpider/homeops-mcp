@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "homeops": {
+      "url": "http://localhost:8787/mcp",
+      "transport": "streamable-http",
+      "protocolVersion": "2025-11-25"
+    }
+  }
+}
