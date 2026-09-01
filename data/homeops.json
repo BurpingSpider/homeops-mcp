@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "id": "asset_hvac_filter",
+      "name": "HVAC filter",
+      "category": "HVAC",
+      "intervalDays": 90,
+      "lastServiceDate": "2026-06-11",
+      "notes": "16x25x1 pleated filter",
+      "createdAt": "2026-09-01T02:02:08.469Z",
+      "history": [{"date":"2026-06-11","action":"service","note":"Demo baseline"}]
+    },
+    {
+      "id": "asset_smoke_alarms",
+      "name": "Smoke alarm batteries",
+      "category": "Safety",
+      "intervalDays": 180,
+      "lastServiceDate": "2026-02-23",
+      "notes": "Test all alarms after replacement",
+      "createdAt": "2026-09-01T02:02:08.469Z",
+      "history": [{"date":"2026-02-23","action":"service","note":"Demo baseline"}]
+    },
+    {
+      "id": "asset_water_filter",
+      "name": "Refrigerator water filter",
+      "category": "Kitchen",
+      "intervalDays": 180,
+      "lastServiceDate": "2026-05-04",
+      "notes": "Model WF-2",
+      "createdAt": "2026-09-01T02:02:08.469Z",
+      "history": [{"date":"2026-05-04","action":"service","note":"Demo baseline"}]
+    }
+  ]
+}
