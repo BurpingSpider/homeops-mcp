@@ -1,25 +1,68 @@
-# HomeOps MCP — 2:15 demo script
+# HomeOps — WebMCP Challenge demo script
 
-**0:00–0:15 — Hook**
-“Home maintenance is rarely hard because changing a filter is difficult. It is hard because six months later nobody remembers what was changed, when, or what size to buy. HomeOps turns Alexa+ into a durable household maintenance memory.”
+Target length: **2:20**. The final video must stay under three minutes.
 
-**0:15–0:35 — Show the maintenance brief**
-Open the demo. Point out one overdue item and one upcoming item. “This state is live, not a mockup. The same tool layer powers both this simulation and the MCP endpoint.”
+## 0:00–0:16 — Problem and promise
 
-**0:35–0:55 — Log maintenance by voice/text**
-Say: “I changed the HVAC filter today.”
-Show the updated date and next due date.
+**Visual:** HomeOps hero and live maintenance brief.
 
-**0:55–1:20 — Add new recurring memory**
-Say: “Remember the dryer vent and clean it every 6 months.”
-Show the new item appear immediately.
+**Narration:**
 
-**1:20–1:40 — Query memory**
-Say: “What’s due?” then “When did I last change the HVAC filter?”
-Show the conversational answers matching the dashboard state.
+“Home maintenance rarely fails because changing a filter is difficult. It fails because dates, part sizes, service notes, and recurring intervals disappear into memory. HomeOps gives people a simple maintenance brief and gives their agents structured tools to act on the same household record.”
 
-**1:40–2:00 — Show MCP**
-Briefly show the README MCP curl examples or terminal output for `tools/list`. “HomeOps exposes six JSON-schema-described tools over Streamable HTTP using MCP protocol 2025-11-25.”
+## 0:16–0:35 — Show the human experience
 
-**2:00–2:15 — Close**
-“No paid API, no required hardware, and no new app habit. HomeOps makes the conversation itself the maintenance workflow: say it once, and remember it when it matters.”
+**Visual:** Scroll through the due list and household record.
+
+**Narration:**
+
+“The homeowner can immediately see what is overdue, what is coming up, when each item was last serviced, and the details needed next time. The hosted demo requires no account, API key, or paid service, and the data stays in the browser.”
+
+## 0:35–0:54 — Explain WebMCP
+
+**Visual:** Show the Agent Contract section and briefly show the `registerTool` implementation in the repository.
+
+**Narration:**
+
+“Instead of forcing an agent to infer these cards and buttons, HomeOps registers five browser-native WebMCP tools with typed input schemas. Read-only tools inspect due work and history. Action tools add responsibilities or record completed service.”
+
+## 0:54–1:18 — Agent plans the work
+
+**Visual:** Click **Run agent demo** and show the prioritized result.
+
+**Narration:**
+
+“A user can ask, ‘Audit my home for the next thirty days and tell me the top three things to handle.’ The `homeops_plan_next` tool returns a prioritized plan based on real due dates, not presentation details scraped from the page.”
+
+## 1:18–1:45 — Agent reads and writes shared state
+
+**Visual:** Demonstrate or illustrate calls to `homeops_lookup_item` and `homeops_log_service`; show the HVAC service date changing in the visible dashboard.
+
+**Narration:**
+
+“The agent can look up the HVAC filter, explain the saved size and next due date, and—after the homeowner confirms the work is finished—call `homeops_log_service`. The human-facing dashboard updates immediately because the tool and the interface share the same state.”
+
+## 1:45–2:04 — Add a new responsibility
+
+**Visual:** Add a refrigerator water filter with a 180-day interval and show it appear.
+
+**Narration:**
+
+“The agent can also add a new recurring responsibility, such as replacing a refrigerator water filter every one hundred eighty days. HomeOps preserves the result so future conversations begin with household context instead of starting over.”
+
+## 2:04–2:20 — Close
+
+**Visual:** Return to hero, then show live URL and GitHub repository.
+
+**Narration:**
+
+“HomeOps turns a website from a dashboard an agent must navigate into a capability layer it can use reliably. People keep visibility and control; agents handle the memory and repetitive work. That is the open web experience HomeOps is built to explore.”
+
+## Required video checks
+
+- Under 3:00
+- Audio is clear
+- Shows the live project functioning
+- Explicitly explains how WebMCP is implemented
+- No copyrighted music
+- Upload publicly to YouTube before submitting
