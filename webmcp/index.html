@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HomeOps — Agent-ready home maintenance</title>
+<meta name="description" content="A WebMCP-powered household maintenance memory where people and agents keep a home on schedule together.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="mark">H</span><div><strong>HomeOps</strong><small>Agent-ready home maintenance</small></div></div>
+  <div id="webmcpStatus" class="status">CHECKING WEBMCP…</div>
+</header>
+<main>
+<section class="hero">
+  <div>
+    <p class="eyebrow">WEBMCP CHALLENGE</p>
+    <h1>Your home remembers.<br>Your agent can act.</h1>
+    <p class="lede">HomeOps turns household maintenance into structured tools. You keep the context; your agent can inspect what is due, look up history, add recurring tasks, and log completed work—without clicking through the UI.</p>
+    <div class="actions">
+      <button id="agentDemo" class="primary">Run agent demo</button>
+      <button id="reset" class="secondary">Reset demo data</button>
+    </div>
+  </div>
+  <div class="agent-card">
+    <div class="agent-head"><span class="pulse"></span> AGENT TASK</div>
+    <p>“Audit my home for the next 30 days, then tell me the top three things to handle.”</p>
+    <pre id="agentLog">Ready. In a WebMCP-aware browser, an agent can call HomeOps tools directly.</pre>
+  </div>
+</section>
+<section class="stats" id="stats"></section>
+<section class="grid">
+  <div class="panel">
+    <div class="panel-head"><div><p class="eyebrow">MAINTENANCE BRIEF</p><h2>What needs attention</h2></div><span>30-day horizon</span></div>
+    <div id="dueList" class="due-list"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><div><p class="eyebrow">SHARED MEMORY</p><h2>Household record</h2></div><span>Local to this browser</span></div>
+    <div id="itemsGrid" class="items"></div>
+  </div>
+</section>
+<section class="tools">
+  <div class="panel-head"><div><p class="eyebrow">AGENT CONTRACT</p><h2>WebMCP tools exposed by this page</h2></div></div>
+  <div class="tool-grid">
+    <article><code>homeops_list_due</code><p>Read overdue and upcoming maintenance.</p></article>
+    <article><code>homeops_lookup_item</code><p>Retrieve service history and next due date.</p></article>
+    <article><code>homeops_log_service</code><p>Record completed work and update the visible UI.</p></article>
+    <article><code>homeops_add_item</code><p>Create a new recurring maintenance responsibility.</p></article>
+    <article><code>homeops_plan_next</code><p>Generate a prioritized maintenance plan for a time horizon.</p></article>
+  </div>
+</section>
+</main>
+<footer>HomeOps · WebMCP Challenge 2026 · No account, API key, or paid service required</footer>
+<script src="app.js"></script>
+</body>
+</html>
