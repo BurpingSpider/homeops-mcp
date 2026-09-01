@@ -1,0 +1,14 @@
+{
+  "name": "homeops-mcp",
+  "version": "1.0.0",
+  "description": "Voice-first household maintenance memory and MCP server for Alexa+ simulation.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
