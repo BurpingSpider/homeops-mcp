@@ -1,75 +1,83 @@
-# HomeOps MCP
+# HomeOps
 
-**HomeOps MCP** is a voice-first household maintenance memory designed as a simulated **Alexa+** experience for the 2026 Amazon Developer Hackathon.
+**HomeOps is an agent-ready household maintenance memory built for the 2026 WebMCP Challenge.**
 
-A user can say things like:
+It turns routine home upkeep into structured, browser-native tools that people and AI agents can use together. A homeowner sees a simple maintenance brief; an agent can inspect due work, look up service history, add recurring responsibilities, log completed maintenance, and create a prioritized plan without guessing its way through the interface.
 
-- “Remember the dryer vent and clean it every 6 months.”
-- “I changed the HVAC filter today.”
-- “What’s due?”
-- “When did I last change the HVAC filter?”
+## Live demo
 
-HomeOps converts those spoken life-admin updates into durable maintenance records, service history, due dates, and a concise household maintenance brief.
+**https://homeops-webmcp.vercel.app**
 
-## Why it matters
+The hosted challenge build is static, requires no account or API key, and stores demo data locally in the browser.
 
-Home maintenance is usually tracked in memory, paper manuals, scattered notes, or not at all. The work itself is often simple; remembering *when* it is due is the failure point. HomeOps makes the conversational surface useful as a durable household memory rather than another checklist that must be manually maintained.
+## Why HomeOps
 
-## What is implemented
+Home maintenance rarely fails because the work is technically difficult. It fails because dates, filter sizes, service notes, and recurring intervals are scattered across memory, paper manuals, and disconnected apps.
 
-- MCP server using **Streamable HTTP** and protocol version `2025-11-25`
-- MCP methods: `initialize`, `ping`, `tools/list`, and `tools/call`
-- Six household-maintenance tools with JSON Schemas
-- Voice-capable Alexa+ simulation in the browser using Web Speech APIs when available
-- Natural-language command parsing that works without any paid model/API
-- Local JSON persistence
-- Due/overdue calculations and maintenance history
-- Responsive demo UI
-- Node built-in test suite
-- MIT license
+HomeOps creates one shared household record:
 
-## Architecture
+- People can see what needs attention and when.
+- Agents can call explicit tools instead of scraping or clicking blindly.
+- Read and write actions operate on the same state shown in the UI.
+- Changes made by an agent are immediately visible to the person.
+
+## WebMCP tools
+
+The challenge build registers these tools with the browser's WebMCP interface when available:
+
+| Tool | Purpose | State change |
+|---|---|---|
+| `homeops_list_due` | List overdue and upcoming maintenance within a horizon | No |
+| `homeops_lookup_item` | Retrieve service history, notes, and next due date | No |
+| `homeops_log_service` | Record completed maintenance and update the dashboard | Yes |
+| `homeops_add_item` | Add a new recurring household responsibility | Yes |
+| `homeops_plan_next` | Return a prioritized maintenance action plan | No |
+
+The page also remains fully usable in browsers that do not expose WebMCP yet.
+
+## Human-agent experience
+
+Example mission:
+
+> Audit my home for the next 30 days, tell me the top three things to handle, and record that I changed the HVAC filter today.
+
+An agent can:
+
+1. Call `homeops_plan_next` to create the priority list.
+2. Explain the recommendations to the homeowner.
+3. Call `homeops_log_service` after confirmation.
+4. Leave the visible dashboard and agent-readable state synchronized.
+
+## Repository structure
 
 ```text
-Browser voice/text
-      |
-      v
-Alexa+ simulation UI
-      |
-      v
-Natural-language intent router
-      |
-      +--------------------+
-      |                    |
-      v                    v
-MCP tool layer <------ /mcp Streamable HTTP
-      |
-      v
-Local household JSON store
+webmcp-static/          Hosted WebMCP challenge entry
+  index.html
+  styles.css
+  app.js
+public/                 Original interactive prototype UI
+lib/                    Maintenance logic and tool definitions
+server.js               Local MCP + demo server
+tests/                  Node test suite
+submission/             Submission copy and demo materials
+.github/workflows/      Automated tests
 ```
 
-The web demo and the MCP endpoint deliberately share the same tool implementation, so the demo is not a mockup: every command changes the same durable state exposed through MCP.
+## Run the full local prototype
 
-## Requirements
-
-- Node.js 20+
-- No npm packages are required
-- No paid API keys are required
-- No Amazon hardware is required for the simulated Alexa+ path
-
-## Run
+Requirements: Node.js 20+.
 
 ```bash
 npm start
 ```
 
-Open:
+Then open:
 
 ```text
 http://localhost:8787
 ```
 
-MCP endpoint:
+The local MCP endpoint is:
 
 ```text
 http://localhost:8787/mcp
@@ -81,42 +89,39 @@ http://localhost:8787/mcp
 npm test
 ```
 
-## MCP quick check
+No npm packages or paid API keys are required.
 
-Initialize:
+## Architecture
 
-```bash
-curl -s http://localhost:8787/mcp \
-  -H 'content-type: application/json' \
-  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"demo","version":"1"}}}'
+```text
+Person / browser agent
+          |
+          v
+HomeOps browser interface
+          |
+          +--> WebMCP tool registration
+          |
+          +--> Shared maintenance state
+          |
+          +--> Visible maintenance brief
+
+Local prototype also exposes:
+          |
+          v
+MCP Streamable HTTP endpoint
 ```
 
-List tools:
+## Privacy and safety
 
-```bash
-curl -s http://localhost:8787/mcp \
-  -H 'content-type: application/json' \
-  -d '{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}'
-```
+- Hosted challenge data stays in browser local storage.
+- The project does not require account credentials or financial information.
+- Tools are narrowly scoped to household maintenance records.
+- Read-only and state-changing tools are clearly separated.
+- The demo contains no purchasing or irreversible real-world actions.
 
-Call a tool:
+## Challenge
 
-```bash
-curl -s http://localhost:8787/mcp \
-  -H 'content-type: application/json' \
-  -d '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"list_due","arguments":{"horizonDays":30}}}'
-```
-
-## Privacy design
-
-The demo is local-first. It does not send household records to a third-party model. The project intentionally avoids passwords, access codes, financial account information, and other secrets.
-
-## Hackathon track
-
-Primary track: **Alexa+**  
-Mini challenge: **Open Source**
-
-The project is a new open-source project created during the Amazon Developer Hackathon submission window.
+Built for **The WebMCP Challenge**, with judging centered on usefulness, originality, execution, thoughtful WebMCP use, and the quality of the human-agent experience.
 
 ## License
 
