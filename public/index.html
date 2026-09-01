@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HomeOps MCP — Alexa+ household memory</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <div class="eyebrow">ALEXA+ SIMULATED EXPERIENCE · MCP 2025-11-25 · <span id="webmcpStatus">WEBMCP CHECKING</span></div>
+        <h1>HomeOps <span>MCP</span></h1>
+        <p>Voice-first household maintenance memory. Say it once. HomeOps remembers when it matters.</p>
+      </div>
+      <button id="resetBtn" class="ghost">Reset demo</button>
+    </header>
+
+    <section class="hero-grid">
+      <div class="assistant-panel">
+        <div class="assistant-topline">
+          <div class="orb" id="orb"><div></div></div>
+          <div><strong>Alexa+ HomeOps</strong><small id="status">Ready</small></div>
+        </div>
+        <div id="chat" class="chat" aria-live="polite">
+          <div class="message assistant">Ask me what needs attention, log maintenance, or teach me a new recurring task.</div>
+        </div>
+        <form id="commandForm" class="composer">
+          <button type="button" id="micBtn" class="mic" title="Voice input">●</button>
+          <input id="command" autocomplete="off" placeholder="Try: What’s due?" />
+          <button type="submit">Send</button>
+        </form>
+        <div class="chips">
+          <button data-command="What's due?">What’s due?</button>
+          <button data-command="I changed the HVAC filter today">Log HVAC filter</button>
+          <button data-command="When did I last change the HVAC filter?">Last service?</button>
+          <button data-command="Remember the dryer vent and clean it every 6 months">Add dryer vent</button>
+        </div>
+      </div>
+
+      <aside class="snapshot">
+        <div class="snapshot-title"><span>Maintenance brief</span><small>live MCP state</small></div>
+        <div id="dueList" class="due-list"></div>
+      </aside>
+    </section>
+
+    <section class="items-section">
+      <div class="section-heading">
+        <div><h2>Household memory</h2><p>Durable records created from voice.</p></div>
+        <div class="privacy">LOCAL-FIRST · NO PAID API</div>
+      </div>
+      <div id="itemsGrid" class="items-grid"></div>
+    </section>
+
+    <footer>
+      <span>HomeOps MCP</span>
+      <span>Open source · Streamable HTTP · Voice optional</span>
+    </footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
