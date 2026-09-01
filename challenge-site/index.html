@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HomeOps — Shared home memory for people and agents</title>
+<meta name="description" content="A WebMCP-powered household maintenance workspace where people stay in control and agents can inspect, propose, and update structured home records.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#top" aria-label="HomeOps home">
+    <span class="mark">H</span>
+    <span><strong>HomeOps</strong><small>Shared home memory</small></span>
+  </a>
+  <div class="top-actions">
+    <span id="webmcpStatus" class="status" role="status">CHECKING WEBMCP…</span>
+    <a class="repo-link" href="https://github.com/BurpingSpider/homeops-mcp" target="_blank" rel="noreferrer">View source ↗</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">WEBMCP CHALLENGE</p>
+      <h1>Your home remembers.<br><span>Your agent can help.</span></h1>
+      <p class="lede">HomeOps turns routine maintenance into a shared, structured workspace. An agent can inspect what is due, propose a work session, add recurring responsibilities, and record completed service—while the person sees every change and keeps final control.</p>
+      <div class="actions">
+        <button id="agentDemo" class="primary">Run WebMCP agent demo</button>
+        <button id="reset" class="secondary">Reset demo</button>
+      </div>
+      <div class="trust-row">
+        <span>7 structured tools</span><span>Human approval loop</span><span>Local-first demo</span>
+      </div>
+    </div>
+
+    <aside class="agent-card" aria-labelledby="agent-task-title">
+      <div class="agent-head"><span class="pulse"></span><span>LIVE AGENT HANDOFF</span></div>
+      <h2 id="agent-task-title">“Audit the next 30 days and propose the best three-task work session.”</h2>
+      <pre id="agentLog" aria-live="polite">Ready. The demo will discover and invoke HomeOps tools through WebMCP when the browser exposes the testing API.</pre>
+    </aside>
+  </section>
+
+  <section class="stats" id="stats" aria-label="Home maintenance summary"></section>
+
+  <section class="collab panel">
+    <div class="panel-head">
+      <div><p class="eyebrow">HUMAN + AGENT</p><h2>Shared work session</h2></div>
+      <span id="planState" class="plan-state">No proposal</span>
+    </div>
+    <div class="collab-grid">
+      <div id="planPanel" class="plan-panel"></div>
+      <div class="activity-wrap">
+        <div class="subhead"><h3>Shared activity</h3><span>Auditable handoffs</span></div>
+        <ol id="activityList" class="activity"></ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="panel">
+      <div class="panel-head"><div><p class="eyebrow">MAINTENANCE BRIEF</p><h2>What needs attention</h2></div><span>30-day horizon</span></div>
+      <div id="dueList" class="due-list"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div><p class="eyebrow">DURABLE CONTEXT</p><h2>Household record</h2></div><span>Saved in this browser</span></div>
+      <div id="itemsGrid" class="items"></div>
+    </div>
+  </section>
+
+  <section class="tools panel">
+    <div class="panel-head"><div><p class="eyebrow">AGENT CONTRACT</p><h2>WebMCP tools exposed by this page</h2></div><span>Imperative registration</span></div>
+    <div class="tool-grid">
+      <article><div class="tool-row"><code>homeops_get_state</code><span class="readonly">READ</span></div><p>Retrieve the maintenance record, active proposal, and recent activity.</p></article>
+      <article><div class="tool-row"><code>homeops_list_due</code><span class="readonly">READ</span></div><p>Inspect overdue and upcoming responsibilities within a chosen horizon.</p></article>
+      <article><div class="tool-row"><code>homeops_lookup_item</code><span class="readonly">READ</span></div><p>Look up service history, notes, and the calculated next due date.</p></article>
+      <article><div class="tool-row"><code>homeops_propose_session</code><span class="write">WRITE</span></div><p>Create a visible work-session proposal that waits for human review.</p></article>
+      <article><div class="tool-row"><code>homeops_get_plan_status</code><span class="readonly">READ</span></div><p>Read the person’s approval or revision request before continuing.</p></article>
+      <article><div class="tool-row"><code>homeops_log_service</code><span class="write">WRITE</span></div><p>Record completed maintenance and immediately update shared state.</p></article>
+      <article><div class="tool-row"><code>homeops_add_item</code><span class="write">WRITE</span></div><p>Add a recurring responsibility with narrow, validated inputs.</p></article>
+    </div>
+  </section>
+</main>
+
+<footer>HomeOps · WebMCP Challenge 2026 · No account, API key, or paid service required</footer>
+<script src="app.js"></script>
+</body>
+</html>
