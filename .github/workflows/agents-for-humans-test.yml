@@ -1,0 +1,27 @@
+name: Agents for Humans tests
+
+on:
+  push:
+    paths:
+      - "agents-for-humans/**"
+      - ".github/workflows/agents-for-humans-test.yml"
+  pull_request:
+    paths:
+      - "agents-for-humans/**"
+      - ".github/workflows/agents-for-humans-test.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: agents-for-humans
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run deterministic domain tests
+        run: python -m unittest -v test_homeops_core.py
+      - name: Compile agent source
+        run: python -m py_compile homeops_core.py homeops_agent.py
