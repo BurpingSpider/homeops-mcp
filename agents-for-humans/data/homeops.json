@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "hvac-filter",
+      "name": "HVAC filter",
+      "category": "Air quality",
+      "interval_days": 90,
+      "last_service_date": "2026-06-01",
+      "estimated_minutes": 10,
+      "notes": "20 x 20 x 1 filter"
+    },
+    {
+      "id": "dryer-vent",
+      "name": "Dryer vent",
+      "category": "Laundry",
+      "interval_days": 180,
+      "last_service_date": "2026-03-05",
+      "estimated_minutes": 35,
+      "notes": "Clean the exterior flap and flexible duct"
+    },
+    {
+      "id": "smoke-detectors",
+      "name": "Smoke detector test",
+      "category": "Safety",
+      "interval_days": 90,
+      "last_service_date": "2026-06-15",
+      "estimated_minutes": 15,
+      "notes": "Test every unit and replace weak batteries"
+    },
+    {
+      "id": "water-heater",
+      "name": "Water heater flush",
+      "category": "Plumbing",
+      "interval_days": 365,
+      "last_service_date": "2025-10-01",
+      "estimated_minutes": 60,
+      "notes": "Annual sediment flush"
+    }
+  ],
+  "proposal": null,
+  "activity": []
+}
