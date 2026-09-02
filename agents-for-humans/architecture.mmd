@@ -1,0 +1,13 @@
+flowchart LR
+    S[Scheduled or user-triggered audit] --> A[Strands Agent]
+    A --> R[Read household state]
+    A --> D[Audit due work]
+    R --> J[(Local JSON state)]
+    D --> J
+    A --> P[Propose work session]
+    P --> J
+    J --> H[Human decision surface]
+    H -->|approve / revise / reject| J
+    A --> G[Read human decision]
+    G --> C[Record only confirmed work]
+    C --> J
