@@ -21,7 +21,23 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install Strands Agents SDK
+        run: python -m pip install --upgrade pip && pip install -r requirements.txt
       - name: Run deterministic domain tests
         run: python -m unittest -v test_homeops_core.py
       - name: Compile agent source
         run: python -m py_compile homeops_core.py homeops_agent.py
+      - name: Run Strands-backed offline workflow
+        env:
+          HOMEOPS_STATE_PATH: /tmp/homeops-ci.json
+        run: |
+          python homeops_agent.py --offline-demo > /tmp/homeops-output.json
+          python - <<'PY'
+          import json
+          with open('/tmp/homeops-output.json', encoding='utf-8') as handle:
+              result = json.load(handle)
+          assert result['mode'] == 'offline-domain-demo'
+          assert result['proposal']['status'] == 'pending_human_review'
+          assert result['due_items']
+          print('Strands import and offline workflow verified')
+          PY
